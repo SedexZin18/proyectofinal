@@ -1,0 +1,140 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #f9f9f9;
+}
+
+/* === TOPBAR === */
+.topbar {
+  background: #111;
+  color: white;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0.5rem 1rem;
+}
+
+.topbar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* === HEADER === */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  flex-wrap: wrap;
+  
+}
+
+.logo {
+  height: 50px;
+}
+
+/* NAVIGATION */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #007bff;
+}
+
+/* MENU TOGGLE (HAMBURGER) */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 4px;
+}
+
+.menu-toggle span {
+  height: 3px;
+  width: 25px;
+  background: #333;
+  display: block;
+  transition: 0.4s;
+}
+
+/* CARRUSEL */
+.carrusel img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* INTRO SECCIÓN */
+.intro {
+  padding: 2rem;
+}
+
+.intro h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  nav {
+    flex-direction: column;
+    width: 100%;
+    display: none;
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  .intro h2 {
+    font-size: 2rem;
+  }
+
+  .intro p {
+    font-size: 1rem;
+  }
+
+  .productos {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+
+  .productos-container {
+    padding: 0 1rem;
+  }
+
+  .card-image {
+    height: 180px;
+  }
+}

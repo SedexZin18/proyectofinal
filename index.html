@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inicio | TS Sublimados</title>
+  <link rel="stylesheet"href="estilos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Topbar moderna */
+    .topbar {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 0;
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topbar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .topbar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .topbar-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topbar-icon {
+      font-size: 1rem;
+    }
+
+    /* Header moderno */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .logo {
+      height: 50px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      transition: left 0.3s ease;
+      z-index: -1;
+    }
+
+    nav a:hover::before {
+      left: 0;
+    }
+
+    nav a:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Carrusel espectacular */
+    .carousel-container {
+      position: relative;
+      height: 70vh;
+      overflow: hidden;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+    }
+
+    .slide-content {
+      text-align: center;
+      color: white;
+      max-width: 800px;
+      padding: 0 20px;
+      animation: slideInUp 1s ease-out;
+    }
+
+    .slide-content h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      background: linear-gradient(45deg, #fff, #f0f0f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slide-content p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      line-height: 1.8;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 15px 40px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(255,107,107,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(255,107,107,0.6);
+    }
+
+    /* Controles del carrusel */
+    .carousel-controls {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 15px;
+      z-index: 10;
+    }
+
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      background: white;
+      transform: scale(1.5);
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.2);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .carousel-nav:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-prev {
+      left: 30px;
+    }
+
+    .carousel-next {
+      right: 30px;
+    }
+
+    /* Sección de introducción moderna */
+    .intro-section {
+      padding: 100px 20px;
+      background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+      position: relative;
+    }
+
+    .intro-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(0,0,0,0.02)"/><circle cx="75" cy="75" r="1.5" fill="rgba(0,0,0,0.01)"/><circle cx="50" cy="10" r="0.5" fill="rgba(0,0,0,0.02)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
+    }
+
+    .intro-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .intro-text {
+      animation: slideInLeft 1s ease-out;
+    }
+
+    .intro-text h2 {
+      font-size: 3rem;
+      color: #333;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .intro-text h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border-radius: 2px;
+    }
+
+    .intro-text p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .feature-item {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+    }
+
+    .feature-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .feature-item h4 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+
+    .feature-item p {
+      font-size: 0.9rem;
+      color: #666;
+      margin: 0;
+    }
+
+    .intro-visual {
+      position: relative;
+      animation: slideInRight 1s ease-out;
+    }
+
+    .visual-card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .visual-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, #ff6b6b, #ff8e8e, #667eea, #764ba2, #ff6b6b);
+      animation: rotate 10s linear infinite;
+      z-index: -2;
+    }
+
+    .visual-card::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      right: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 17px;
+      z-index: -1;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .visual-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Footer moderno y dinámico */
+    .footer {
+      background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(255,107,107,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(102,126,234,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(118,75,162,0.1) 0%, transparent 50%);
+      animation: floatingBg 15s ease-in-out infinite;
+    }
+
+    
+
+    .footer-drip {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      z-index: 1;
+    }
+
+    .footer-drip svg {
+      width: 100%;
+      height: 100%;
+      animation: wave 8s ease-in-out infinite;
+    }
+
+  
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px 40px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-section h4 {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border-radius: 2px;
+    }
+
+    .company-info .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-img {
+      height: 40px;
+     
+    }
+
+    .footer-logo h3 {
+      font-size: 1.5rem;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+
+    .company-description {
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+    }
+
+    .social-link:hover::before {
+      transform: scale(1);
+    }
+
+    .social-link:hover {
+      transform: translateY(-5px);
+      color: white;
+    }
+
+    .facebook { background: rgba(59, 89, 152, 0.2); }
+    .facebook::before { background: #3b5998; }
+    .instagram { background: rgba(225, 48, 108, 0.2); }
+    .instagram::before { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .whatsapp { background: rgba(37, 211, 102, 0.2); }
+    .whatsapp::before { background: #25d366; }
+    .email { background: rgba(234, 67, 53, 0.2); }
+    .email::before { background: #ea4335; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+
+    .contact-item:hover {
+      color: #ff6b6b;
+    }
+
+    .contact-item i {
+      width: 20px;
+      color: #ff6b6b;
+      font-size: 1.1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .footer-links a::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ff6b6b;
+      padding-left: 20px;
+    }
+
+    .footer-links a:hover::before {
+      transform: translateX(5px);
+    }
+
+    .newsletter-form {
+      display: flex;
+      margin-bottom: 20px;
+      border-radius: 25px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      background: transparent;
+      color: white;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .newsletter-btn {
+      padding: 12px 20px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .newsletter-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .quality-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .badge i {
+      color: #ff6b6b;
+    }
+
+    .footer-bottom {
+      background: rgba(0,0,0,0.3);
+      padding: 20px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-bottom-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #ccc;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #ff6b6b;
+    }
+    
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .topbar-content {
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .header-content {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .slide-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .intro-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .intro-text h2 {
+        font-size: 2.5rem;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .carousel-nav {
+        display: none;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 60px 20px 30px;
+      }
+
+      .footer-section h4 {
+        font-size: 1.2rem;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .footer-bottom-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .footer-bottom-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-content">
+      <div class="topbar-item">
+        <span class="topbar-icon">📍</span>
+        <span>Sede principal: Calle Virreynal 191, El Cortijo - Trujillo</span>
+      </div>
+      <div class="topbar-item">
+        <span class="topbar-icon">📧</span>
+        <span>tssublimados@gmail.com</span>
+        <span class="topbar-icon">📱</span>
+        <span>WhatsApp: 926736833</span>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-content">
+      <img src="img/logo.png" alt="Logo TS sublimados" class="logo">
+      <nav>
+        <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+        <a href="empresa/empresa.html"><i class="fas fa-building"></i> La Empresa</a>
+        <a href="productos/productos.html"><i class="fas fa-shopping-bag"></i> Productos</a>
+        <a href="pago/pago.html"><i class="fas fa-credit-card"></i> Formas de Pago</a>
+      </nav>
+      
+    </div>
+    <div class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('active')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <section class="carousel-container">
+    <div class="carousel">
+      <div class="carousel-slide active">
+        <div class="slide-content">
+          <h1>✨ TS Sublimados</h1>
+          <p>Transformamos tus ideas en productos únicos y personalizados con la más alta calidad en sublimación.</p>
+          <a href="https://drive.google.com/file/d/1_HbTCw2nogg81mBoTThgoEXNEhj6SCVg/view?usp=drive_link" class="cta-button">Ver Productos</a>
+        </div>
+      </div>
+      
+      <div class="carousel-slide">
+        <div class="slide-content">
+          <h1>🎨 Personalización Total</h1>
+          <p>Desde camisetas hasta tazas, dale vida a tus diseños con colores vibrantes y acabados profesionales.</p>
+          <a href="https://drive.google.com/file/d/1_HbTCw2nogg81mBoTThgoEXNEhj6SCVg/view?usp=drive_link" class="cta-button">Personalizar Ahora</a>
+        </div>
+      </div>
+      
+      <div class="carousel-slide">
+        <div class="slide-content">
+          <h1>🚀 Calidad Premium</h1>
+          <p>Utilizamos la mejor tecnología de sublimación para garantizar durabilidad y colores que perduran.</p>
+          <a href="https://drive.google.com/file/d/1_HbTCw2nogg81mBoTThgoEXNEhj6SCVg/view?usp=drive_link" class="cta-button">Conoce Más</a>
+        </div>
+      </div>
+    </div>
+    
+    <button class="carousel-nav carousel-prev">‹</button>
+    <button class="carousel-nav carousel-next">›</button>
+    
+    <div class="carousel-controls">
+      <div class="carousel-dot active" data-slide="0"></div>
+      <div class="carousel-dot" data-slide="1"></div>
+      <div class="carousel-dot" data-slide="2"></div>
+    </div>
+  </section>
+
+  <section class="intro-section">
+    <div class="intro-container">
+      <div class="intro-text">
+        <h2>¿Qué es la sublimación?</h2>
+        <p>
+          La sublimación es una técnica revolucionaria de personalización que permite transferir diseños con una calidad excepcional. Esta técnica utiliza calor para transformar tinta especial directamente en gas, penetrando las fibras del material para crear estampados permanentes, vibrantes y resistentes al lavado.
+        </p>
+        
+        <div class="features-grid">
+          <div class="feature-item">
+            <h4>🎯 Alta Precisión</h4>
+            <p>Detalles nítidos y colores exactos en cada transferencia.</p>
+          </div>
+          <div class="feature-item">
+            <h4>💪 Durabilidad</h4>
+            <p>Resistente al lavado y uso prolongado sin decoloración.</p>
+          </div>
+          <div class="feature-item">
+            <h4>🌈 Colores Vibrantes</h4>
+            <p>Paleta completa de colores intensos y brillantes.</p>
+          </div>
+          <div class="feature-item">
+            <h4>💰 Inversión Inteligente</h4>
+            <p>Excelente opción para emprender tu negocio de personalización.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="intro-visual">
+        <div class="visual-card">
+          <div class="visual-icon">🎨</div>
+          <h3>Proceso de Sublimación</h3>
+          <p><strong>1.</strong> Diseño digital impreso en papel especial</p>
+          <p><strong>2.</strong> Aplicación de calor y presión controlada</p>
+          <p><strong>3.</strong> Transformación de tinta sólida a gas</p>
+          <p><strong>4.</strong> Penetración permanente en el material</p>
+          <p><strong>5.</strong> Producto personalizado de alta calidad</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer moderno y dinámico -->
+  <footer class="footer">
+    
+    <div class="footer-content">
+      <div class="footer-section company-info">
+        <div class="footer-logo">
+          <img src="img/logo.png" alt="TS Sublimados" class="footer-logo-img">
+           <h3 style="color: rgb(255, 255, 255); font-weight: bold;">TS Sublimados</h3>
+        </div>
+        <p class="company-description">
+          Somos especialistas en sublimación e impresión personalizada. Transformamos tus ideas en productos únicos con la más alta calidad y tecnología de vanguardia.
+        </p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/share/185uv9JJUa/" class="social-link facebook" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/sublimadosts_trujillo?igsh=MTJnYmI5bXZsdmY3MQ==" class="social-link instagram" title="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+       <a href="https://www.tiktok.com/@sublimadosts_trujillo?_t=ZM-8wn6wU1qbLi&_r=1" class="social-link tiktok" title="TikTok">
+           <i class="fab fa-tiktok"></i>
+       </a>
+
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Calle Virreynal 191, El Cortijo - Trujillo</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>926 736 833</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>tssublimados@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Lun - Vie: 9:00 AM - 6:00 PM</span>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>Productos</h4>
+        <ul class="footer-links">
+          <li><a href="productos/productos.html">Camisetas Sublimadas</a></li>
+          <li><a href="productos/productos.html">Tazas Personalizadas</a></li>
+          <li><a href="productos/productos.html">Gorras y Sombreros</a></li>
+          <li><a href="productos/productos.html">Almohadas</a></li>
+          <li><a href="productos/productos.html">Mousepads</a></li>
+          <li><a href="productos/productos.html">Rompecabezas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Servicios</h4>
+        <ul class="footer-links">
+          <li><a href="empresa/empresa.html">Diseño Personalizado</a></li>
+          <li><a href="empresa/empresa.html">Impresión Digital</a></li>
+          <li><a href="empresa/empresa.html">Sublimación Premium</a></li>
+          <li><a href="pago/pago.html">Métodos de Pago</a></li>
+          <li><a href="empresa/empresa.html">Envíos a Domicilio</a></li>
+          <li><a href="">Asesoría Técnica</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Newsletter</h4>
+        <p>Suscríbete para recibir ofertas especiales y novedades</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Tu email aquí..." class="newsletter-input">
+          <button class="newsletter-btn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <div class="quality-badges">
+          <div class="badge">
+            <i class="fas fa-award"></i>
+            <span>Calidad Premium</span>
+          </div>
+          <div class="badge">
+            <i class="fas fa-shipping-fast"></i>
+            <span>Envío Rápido</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; 2025 TS Sublimados. Todos los derechos reservados.</p>
+        <div class="footer-bottom-links">
+          <a href="Terminos y condiciones/terminos.html">Términos y Condiciones</a>
+          <a href="Politica de privacidad/poli.html">Política de Privacidad</a>
+          <a href="libro de reclamos/Reclamos.html">Libro de Reclamaciones</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
+    <script src="https://files.bpcontent.cloud/2025/07/24/22/20250724223016-HJURRSGY.js" defer></script>
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <script>
+    
+    // Carrusel JavaScript
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+      // Ocultar todas las slides
+      slides.forEach(slide => slide.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+      
+      // Mostrar slide actual
+      slides[index].classList.add('active');
+      dots[index].classList.add('active');
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(currentSlide);
+    }
+
+    // Event listeners
+    document.querySelector('.carousel-next').addEventListener('click', nextSlide);
+    document.querySelector('.carousel-prev').addEventListener('click', prevSlide);
+
+    // Dots navigation
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+      });
+    });
+
+    // Auto-play carrusel
+    setInterval(nextSlide, 5000);
+
+    // Animaciones al hacer scroll
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observar elementos para animaciones
+    document.querySelectorAll('.feature-item').forEach((item, index) => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(30px)';
+      item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+      observer.observe(item);
+    });
+
+    // Efecto parallax suave
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const carousel = document.querySelector('.carousel-container');
+      if (carousel) {
+        carousel.style.transform = `translateY(${scrolled * 0.5}px)`;
+      }
+    });
+
+    // Header sticky effect
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.boxShadow = '0 2px 30px rgba(0,0,0,0.15)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+      }
+    });
+
+    // Newsletter functionality
+    document.querySelector('.newsletter-btn').addEventListener('click', function() {
+      const email = document.querySelector('.newsletter-input').value;
+      if (email) {
+        alert('¡Gracias por suscribirte! Te mantendremos informado sobre nuestras novedades.');
+        document.querySelector('.newsletter-input').value = '';
+      } else {
+        alert('Por favor, ingresa un email válido.');
+      }
+    });
+  </script>
+</body>
+</html>

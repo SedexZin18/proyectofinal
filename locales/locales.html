@@ -1,0 +1,584 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nuestros Locales | TS Sublimados</title>
+  <link rel="stylesheet"href="estilos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+  .footer {
+      background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(255,107,107,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(102,126,234,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(118,75,162,0.1) 0%, transparent 50%);
+      animation: floatingBg 15s ease-in-out infinite;
+    }
+
+    
+
+    .footer-drip {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      z-index: 1;
+    }
+
+    .footer-drip svg {
+      width: 100%;
+      height: 100%;
+      animation: wave 8s ease-in-out infinite;
+    }
+
+  
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px 40px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-section h4 {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border-radius: 2px;
+    }
+
+    .company-info .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-img {
+      height: 40px;
+     
+    }
+
+    .footer-logo h3 {
+      font-size: 1.5rem;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+
+    .company-description {
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+    }
+
+    .social-link:hover::before {
+      transform: scale(1);
+    }
+
+    .social-link:hover {
+      transform: translateY(-5px);
+      color: white;
+    }
+
+    .facebook { background: rgba(59, 89, 152, 0.2); }
+    .facebook::before { background: #3b5998; }
+    .instagram { background: rgba(225, 48, 108, 0.2); }
+    .instagram::before { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .whatsapp { background: rgba(37, 211, 102, 0.2); }
+    .whatsapp::before { background: #25d366; }
+    .email { background: rgba(234, 67, 53, 0.2); }
+    .email::before { background: #ea4335; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+
+    .contact-item:hover {
+      color: #ff6b6b;
+    }
+
+    .contact-item i {
+      width: 20px;
+      color: #ff6b6b;
+      font-size: 1.1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .footer-links a::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ff6b6b;
+      padding-left: 20px;
+    }
+
+    .footer-links a:hover::before {
+      transform: translateX(5px);
+    }
+
+    .newsletter-form {
+      display: flex;
+      margin-bottom: 20px;
+      border-radius: 25px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      background: transparent;
+      color: white;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .newsletter-btn {
+      padding: 12px 20px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .newsletter-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .quality-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .badge i {
+      color: #ff6b6b;
+    }
+
+    .footer-bottom {
+      background: rgba(0,0,0,0.3);
+      padding: 20px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-bottom-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #ccc;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #ff6b6b;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: white;
+    }
+    
+    .efectivo-info {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .sucursal {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      backdrop-filter: blur(10px);
+    }
+
+    .sucursal h4 {
+      color: #333;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sucursal p {
+      color: #666;
+      margin-bottom: 0.3rem;
+    }
+    .btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      display: inline-block;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .topbar {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 0;
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topbar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .topbar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .topbar-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topbar-icon {
+      font-size: 1rem;
+    }
+    
+</style>
+<body>
+  <div class="topbar">
+    <div class="topbar-content">
+      <div class="topbar-item">
+        <span class="topbar-icon">📍</span>
+        <span>Sede principal: Calle Virreynal 191, El Cortijo - Trujillo</span>
+      </div>
+      <div class="topbar-item">
+        <span class="topbar-icon">📧</span>
+        <span>tssublimados@gmail.com</span>
+        <span class="topbar-icon">📱</span>
+        <span>WhatsApp: 926736833</span>
+      </div>
+    </div>
+  </div>
+  <header>
+    <img src="../img/logo.png" alt="Logo TS sublimados" class="logo">
+    <nav>
+      <a href="../index.html"><i class="fas fa-home"></i> Inicio</a>
+      <a href="../empresa/empresa.html"><i class="fas fa-building"></i> La Empresa</a>
+      <a href="../productos/productos.html"><i class="fas fa-shopping-bag"></i> Productos</a>
+      <a href="../pago/pago.html"><i class="fas fa-credit-card"></i> Formas de Pago</a>
+    </nav>
+  </header>
+
+  <div id="form-efectivo" class="formulario-container">
+      <div class="efectivo-info">
+        <h3><i class="fas fa-store"></i> Pago en Efectivo</h3>
+        <p>Visita cualquiera de nuestros locales para pagar en efectivo</p>
+        
+        <div class="sucursal">
+          <h4>🏪 Local Principal - Centro</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Av. España 123, Trujillo</p>
+          <p><i class="fas fa-clock"></i> Lunes a Sábado: 9:00 AM - 7:00 PM</p>
+          <p><i class="fas fa-phone"></i> (044) 123-456</p>
+        </div>
+
+        <div class="sucursal">
+          <h4>🏪 Calle Virreynal 191, El Cortijo - Trujillo</h4>
+          <p><i class="fas fa-map-marker-alt"></i> El cortijo, Trujillo</p>
+          <p><i class="fas fa-clock"></i> Lunes a Domingo: 10:00 AM - 10:00 PM</p>
+          <p><i class="fas fa-phone"></i> (044) 654-321</p>
+        </div>
+
+        <div style="margin-top: 2rem;">
+          <p><strong>💡 Consejo:</strong> Llama antes de visitarnos para confirmar la disponibilidad del producto</p>
+          <a href="https://wa.me/51926736833?text=Hola%2C%20quiero%20coordinar%20una%20visita%20para%20pagar%20en%20efectivo" 
+             target="_blank" class="btn" style="margin-top: 1rem;">
+            <i class="fab fa-whatsapp"></i> Coordinar Visita
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    
+    <div class="footer-content">
+      <div class="footer-section company-info">
+        <div class="footer-logo">
+           <img src="img/logo.png" alt="TS Sublimados" class="footer-logo-img">
+           <h3 style="color: rgb(255, 255, 255); font-weight: bold;">TS Sublimados</h3>
+        </div>
+        <p class="company-description">
+          Somos especialistas en sublimación e impresión personalizada. Transformamos tus ideas en productos únicos con la más alta calidad y tecnología de vanguardia.
+        </p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/share/185uv9JJUa/" class="social-link facebook" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/sublimadosts_trujillo?igsh=MTJnYmI5bXZsdmY3MQ==" class="social-link instagram" title="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+       <a href="https://www.tiktok.com/@sublimadosts_trujillo?_t=ZM-8wn6wU1qbLi&_r=1" class="social-link tiktok" title="TikTok">
+           <i class="fab fa-tiktok"></i>
+       </a>
+
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contacto</h4>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Calle Virreynal 191, El Cortijo - Trujillo</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>926 736 833</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>tssublimados@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Lun - Vie: 9:00 AM - 6:00 PM</span>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>Productos</h4>
+        <ul class="footer-links">
+          <li><a href="productos/productos.html">Camisetas Sublimadas</a></li>
+          <li><a href="productos/productos.html">Tazas Personalizadas</a></li>
+          <li><a href="productos/productos.html">Gorras y Sombreros</a></li>
+          <li><a href="productos/productos.html">Almohadas</a></li>
+          <li><a href="productos/productos.html">Mousepads</a></li>
+          <li><a href="productos/productos.html">Rompecabezas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Servicios</h4>
+        <ul class="footer-links">
+          <li><a href="empresa/empresa.html">Diseño Personalizado</a></li>
+          <li><a href="empresa/empresa.html">Impresión Digital</a></li>
+          <li><a href="empresa/empresa.html">Sublimación Premium</a></li>
+          <li><a href="pago/pago.html">Métodos de Pago</a></li>
+          <li><a href="#">Envíos a Domicilio</a></li>
+          <li><a href="#">Asesoría Técnica</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Newsletter</h4>
+        <p>Suscríbete para recibir ofertas especiales y novedades</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Tu email aquí..." class="newsletter-input">
+          <button class="newsletter-btn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <div class="quality-badges">
+          <div class="badge">
+            <i class="fas fa-award"></i>
+            <span>Calidad Premium</span>
+          </div>
+          <div class="badge">
+            <i class="fas fa-shipping-fast"></i>
+            <span>Envío Rápido</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; 2025 TS Sublimados. Todos los derechos reservados.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Términos y Condiciones</a>
+          <a href="#">Política de Privacidad</a>
+          <a href="#">Libro de Reclamaciones</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
+    <script src="https://files.bpcontent.cloud/2025/07/24/22/20250724223016-HJURRSGY.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</body>
+</html>

@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos | TS Sublimados</title>
+  <link rel="stylesheet" href="" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .footer {
+      background: linear-gradient(135deg, #667eea 0%, #667eea 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(255,107,107,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(102,126,234,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(118,75,162,0.1) 0%, transparent 50%);
+      animation: floatingBg 15s ease-in-out infinite;
+    }
+
+    
+
+    .footer-drip {
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 120px;
+      z-index: 1;
+    }
+
+    .footer-drip svg {
+      width: 100%;
+      height: 100%;
+      animation: wave 8s ease-in-out infinite;
+    }
+
+  
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px 40px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+      gap: 40px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-section h4 {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-section h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border-radius: 2px;
+    }
+
+    .company-info .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .footer-logo-img {
+      height: 40px;
+     
+    }
+
+    .footer-logo h3 {
+      font-size: 1.5rem;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+    }
+
+    .company-description {
+      line-height: 1.6;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .social-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: transform 0.3s ease;
+      z-index: -1;
+    }
+
+    .social-link:hover::before {
+      transform: scale(1);
+    }
+
+    .social-link:hover {
+      transform: translateY(-5px);
+      color: white;
+    }
+
+    .facebook { background: rgba(59, 89, 152, 0.2); }
+    .facebook::before { background: #3b5998; }
+    .instagram { background: rgba(225, 48, 108, 0.2); }
+    .instagram::before { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .whatsapp { background: rgba(37, 211, 102, 0.2); }
+    .whatsapp::before { background: #25d366; }
+    .email { background: rgba(234, 67, 53, 0.2); }
+    .email::before { background: #ea4335; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+
+    .contact-item:hover {
+      color: #ff6b6b;
+    }
+
+    .contact-item i {
+      width: 20px;
+      color: #ff6b6b;
+      font-size: 1.1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .footer-links a::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: #ff6b6b;
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ff6b6b;
+      padding-left: 20px;
+    }
+
+    .footer-links a:hover::before {
+      transform: translateX(5px);
+    }
+
+    .newsletter-form {
+      display: flex;
+      margin-bottom: 20px;
+      border-radius: 25px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      background: transparent;
+      color: white;
+      outline: none;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .newsletter-btn {
+      padding: 12px 20px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border: none;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .newsletter-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .quality-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .badge i {
+      color: #ff6b6b;
+    }
+
+    .footer-bottom {
+      background: rgba(0,0,0,0.3);
+      padding: 20px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-bottom-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #ccc;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-bottom-links a:hover {
+      color: #ff6b6b;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    /* Header moderno */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      height: 50px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Sección intro con animación */
+    .intro {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .intro h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .intro p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Contenedor de productos mejorado */
+    .productos-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    /* Cards con efectos avanzados */
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6b35, #f7931e, #25d366, #667eea);
+      background-size: 300% 100%;
+      animation: gradientMove 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    /* CORREGIDO: Contenedor de imagen con tamaño fijo */
+    .card-image {
+      position: relative;
+      overflow: hidden;
+      height: 200px; /* Altura fija más pequeña */
+      width: 100%;
+      background: #f8f9fa; /* Color de fondo por si la imagen no carga */
+    }
+
+    /* CORREGIDO: Imagen ajustada al contenedor */
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* Cambiado de cover a contain para que se vea completa */
+      object-position: center; /* Centrar la imagen */
+      transition: transform 0.6s ease;
+      padding: 10px; /* Pequeño padding para que no toque los bordes */
+    }
+
+    .card:hover img {
+      transform: scale(1.05); /* Reducido el scale para que no se vea tan exagerado */
+    }
+
+    /* Badges mejorados */
+    .badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: white;
+      backdrop-filter: blur(10px);
+      z-index: 10;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .badge.green {
+      background: linear-gradient(135deg, #28a745, #20c997);
+    }
+
+    .badge.orange {
+      background: linear-gradient(135deg, #ff6b35, #f7931e);
+    }
+
+    .badge.red {
+      background: linear-gradient(135deg, #dc3545, #e74c3c);
+    }
+
+    /* Contenido de la card */
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .precio-container {
+      margin-bottom: 1.5rem;
+    }
+
+    .precio {
+      color: #28a745;
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .precio-descuento {
+      color: #e74c3c;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .precio del {
+      color: #999;
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
+    }
+
+    /* Botón de WhatsApp mejorado */
+    .boton-comprar {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: white;
+      border: none;
+      padding: 1rem;
+      width: 100%;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .boton-comprar::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.6s ease;
+    }
+
+    .boton-comprar:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .boton-comprar:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+    }
+
+    .boton-comprar i {
+      font-size: 1.2rem;
+    }
+
+    /* Efectos adicionales */
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    @keyframes floating {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Responsive mejorado */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .productos {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem 0;
+      }
+
+      .productos-container {
+        padding: 0 1rem;
+      }
+
+      /* CORREGIDO: Altura de imagen más pequeña en móviles */
+      .card-image {
+        height: 180px;
+      }
+    }
+
+    /* Efectos de entrada escalonados */
+    .card:nth-child(1) { animation: slideInUp 0.6s ease-out 0.1s both; }
+    .card:nth-child(2) { animation: slideInUp 0.6s ease-out 0.2s both; }
+    .card:nth-child(3) { animation: slideInUp 0.6s ease-out 0.3s both; }
+    .card:nth-child(4) { animation: slideInUp 0.6s ease-out 0.4s both; }
+    .card:nth-child(5) { animation: slideInUp 0.6s ease-out 0.5s both; }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .topbar {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 0;
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topbar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .topbar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .topbar-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topbar-icon {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-content">
+      <div class="topbar-item">
+        <span class="topbar-icon">📍</span>
+        <span>Sede principal: Calle Virreynal 191, El Cortijo - Trujillo</span>
+      </div>
+      <div class="topbar-item">
+        <span class="topbar-icon">📧</span>
+        <span>tssublimados@gmail.com</span>
+        <span class="topbar-icon">📱</span>
+        <span>WhatsApp: 926736833</span>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <img src="../img/logo.png" alt="Logo TS sublimados" class="logo">
+    <nav>
+      <a href="../index.html"><i class="fas fa-home"></i> Inicio</a>
+      <a href="../empresa/empresa.html"><i class="fas fa-building"></i> La Empresa</a>
+      <a href="../productos/productos.html"><i class="fas fa-shopping-bag"></i> Productos</a>
+      <a href="../pago/pago.html"><i class="fas fa-credit-card"></i> Formas de Pago</a>
+    </nav>
+  </header>
+
+  <section class="intro">
+    <h2>🎨 Catálogo de Productos</h2>
+    <p>Descubre nuestros productos premium para sublimación, con la mejor calidad y precios competitivos tanto al por mayor como por unidad.</p>
+  </section>
+
+  <div class="productos-container">
+    <section class="productos">
+      <div class="card floating">
+        <div class="card-image">
+          <span class="badge green">Preordenar</span>
+          <img src="https://taino.pe/cdn/shop/products/TAZADE12ONZ.webp?v=1744243853&width=1445" alt="Taza blanca">
+        </div>
+        <div class="card-content">
+          <h3>🍵 Taza Blanca 11oz Premium</h3>
+          <div class="precio-container">
+            <span class="precio">Unidad: S/. 15.00</span>
+            <span class="precio">Mayor: S/. 10.00</span>
+          </div>
+          <a class="boton-comprar" href="https://wa.me/51926736833?text=Hola%2C%20quiero%20comprar%20Taza%20blanca%20de%2011oz" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            Comprar Ahora
+          </a>
+        </div>
+      </div>
+
+      <div class="card floating">
+        <div class="card-image">
+          <span class="badge green">Más Popular</span>
+          <img src="../img/Tazas magicas.jpg">
+        </div>
+        <div class="card-content">
+          <h3>🍶 Tazas magicas 11onz</h3>
+          <div class="precio-container">
+            <span class="precio">Unidad: S/. 25.00</span>
+            <span class="precio">Mayor: S/. 15.00</span>
+          </div>
+          <a class="boton-comprar" href="https://wa.me/51926736833?text=Hola%2C%20quiero%20comprar%20Polos%20Sublimados" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            Ver Catálogo
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <span class="badge orange">-50% OFF</span>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzcX1nZP1nG3yinIYAaWJdZlwjizRpCqBTJQ&s" alt="Taza color interior">
+        </div>
+        <div class="card-content">
+          <h3>🎨 Taza Color Interior</h3>
+          <div class="precio-container">
+            <span class="precio">
+              <span>Unidad: </span><del>S/. 18.00</del> 
+              <span class="precio-descuento">S/. 13.00</span>
+            </span>
+            <span class="precio">Mayor: S/. 8.00</span>
+          </div>
+          <a class="boton-comprar" href="https://wa.me/51926736833?text=Hola%2C%20quiero%20comprar%20Taza%20color%20interior" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            ¡Aprovecha la Oferta!
+          </a>
+        </div>
+      </div>
+
+      <div class="card floating">
+        <div class="card-image">
+          <img src="https://grupoficom.com/wp-content/uploads/2023/04/HCSL0150.jpg" alt="Termo Digital">
+        </div>
+        <div class="card-content">
+          <h3>🌡️ Termo Digital Inteligente</h3>
+          <div class="precio-container">
+            <span class="precio">Unidad: S/. 30.00</span>
+            <span class="precio">Mayor: S/. 25.00</span>
+          </div>
+          <a class="boton-comprar" href="https://wa.me/51926736833?text=Hola%2C%20quiero%20comprar%20un%20Termo%20Digital" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            Comprar Ahora
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="https://cdnx.jumpseller.com/importecdigital/image/56191913/resize/1200/1200?1730751065" alt="Tomatodo">
+        </div>
+        <div class="card-content">
+          <h3>💧 Tomatodo Deportivo 600ml</h3>
+          <div class="precio-container">
+            <span class="precio">
+              <span>Unidad: </span><del>S/. 25.00</del> 
+              <span class="precio-descuento">S/. 20.00</span>
+            </span>
+            <span class="precio">Mayor: S/. 15.00</span>
+          </div>
+          <a class="boton-comprar" href="https://wa.me/51926736833?text=Hola%2C%20quiero%20comprar%20un%20Tomatodo%20600ml" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            Comprar Ahora
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="../img/Rompecabezas.jpg" alt="Rompecabezas">
+        </div>
+        <div class="card-content">
+          <h3>🧩 Rompecabezas</h3>
+          <div class="precio-container">
+            <span class="precio">Unidad: S/. 20.00</span>
+            <span class="precio">Mayor: S/. 15.00</span>
+          </div>
+          <a class="boton-comprar" href="https://wa.me/51926736833?text=Hola%2C%20quiero%20comprar%20un%20Tomatodo%20600ml" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            Comprar Ahora
+          </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-image">
+          <img src="../img/alcancilla.jpg" alt="Alcancias">
+        </div>
+        <div class="card-content">
+          <h3>🏦 Alcancias</h3>
+          <div class="precio-container">
+            <span class="precio">Unidad: S/. 20.00</span>
+            <span class="precio">Mayor: S/. 15.00</span>
+          </div>
+          <a class="boton-comprar" href="https://wa.me/51926736833?text=Hola%2C%20quiero%20comprar%20un%20Tomatodo%20600ml" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            ¡Pidelo ya!
+          </a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image">
+          <img src="../img/Gorras.jpg" alt="Gorras">
+        </div>
+        <div class="card-content">
+          <h3>🧢 Gorras</h3>
+          <div class="precio-container">
+            <span class="precio">Unidad: S/. 20.00</span>
+            <span class="precio">Mayor: S/. 15.00</span>
+          </div>
+          <a class="boton-comprar" href="https://wa.me/51926736833?text=Hola%2C%20quiero%20comprar%20un%20Tomatodo%20600ml" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            Comprar Ahora
+          </a>
+        </div>
+      </div>
+
+      <div class="card floating">
+        <div class="card-image">
+          <span class="badge green">Preordenar</span>
+          <img src="../img/poloestampado.avif" alt="Polos Sublimados">
+        </div>
+        <div class="card-content">
+          <h3>👕 Polos Estampados Premium</h3>
+          <div class="precio-container">
+            <span class="precio">Desde: S/. 15.00</span>
+          </div>
+          <a class="boton-comprar" href="https://wa.me/51926736833?text=Hola%2C%20quiero%20comprar%20Polos%20Sublimados" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            Ver Catálogo
+          </a>
+        </div>
+      </div>
+      
+    </section>
+  </div>
+  
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
+    <script src="https://files.bpcontent.cloud/2025/07/24/22/20250724223016-HJURRSGY.js" defer></script>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script>
+    // Efecto de brillo en los botones
+    document.querySelectorAll('.boton-comprar').forEach(button => {
+      button.addEventListener('mouseenter', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        this.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.3) 0%, transparent 50%), linear-gradient(135deg, #25d366, #128c7e)`;
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        this.style.background = 'linear-gradient(135deg, #25d366, #128c7e)';
+      });
+    });
+  </script>
+
+</body>
+</html>

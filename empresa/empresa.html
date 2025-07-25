@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>La Empresa | TS Sublimados</title>
+  <link rel="stylesheet"href="estilos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    background-color: #f5f5f5;
+    color: #333;
+  }
+
+  .topbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .topbar-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 20px;
+  }
+
+  .topbar-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .topbar-icon {
+    font-size: 16px;
+  }
+header {
+  background-color: #ffffff;
+  padding: 10px 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 60px;
+  height: auto;
+}
+
+nav {
+  display: flex;
+  gap: 35px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+nav a i {
+  margin-right: 6px;
+  font-size: 16px;
+  color: #333;
+}
+
+nav a:hover {
+  color: #0077cc;
+}
+
+  /* Estilos para la sección del mapa */
+    .map-section {
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="20" r="1.5" fill="rgba(255,255,255,0.15)"/><circle cx="30" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="70" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .map-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .map-header {
+      text-align: center;
+      margin-bottom: 50px;
+      animation: slideInDown 1s ease-out;
+    }
+
+    .map-header h2 {
+      font-size: 3rem;
+      color: white;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      font-weight: 300;
+    }
+
+    .map-header p {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .map-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      animation: slideInUp 1s ease-out 0.3s both;
+    }
+
+    .map-info {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+
+    .map-info h3 {
+      color: white;
+      font-size: 1.8rem;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+      padding: 15px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .detail-item:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateX(10px);
+    }
+
+    .detail-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .map-wrapper {
+      position: relative;
+      border-radius: 20px;    
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      animation: mapFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes mapFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .interactive-map {
+      width: 100%;
+      height: 400px;
+      border: none;
+      filter: grayscale(20%) contrast(1.1);
+      transition: all 0.3s ease;
+    }
+
+    .interactive-map:hover {
+      filter: grayscale(0%) contrast(1.2);
+      transform: scale(1.02);
+    }
+
+    .map-overlay {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.95);
+      padding: 15px 20px;
+      border-radius: 50px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .map-overlay span {
+      color: #333;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .cta-btn {
+      flex: 1;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .cta-btn:hover::before {
+      left: 100%;
+    }
+
+    .cta-primary {
+      background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255,107,107,0.4);
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255,107,107,0.6);
+    }
+
+    .cta-secondary {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .cta-secondary:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateY(-2px);
+    }
+      .brand-section {
+    background: linear-gradient(135deg, #ffffff, #e6f0ff);
+    padding: 60px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .brand-left {
+    flex: 1 1 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .brand-left h1 {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    color: #222;
+  }
+
+  .brand-left span {
+    color: #764ba2;
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  .brand-right {
+    flex: 1 1 500px;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+
+  .brand-right p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #444;
+  }
+
+  .brand-right a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #764ba2;
+    text-decoration: underline;
+  }
+
+    @keyframes slideInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  @media (max-width: 768px) {
+    .map-content,
+    .brand-section {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+    .topbar-content {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .header-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav {
+    margin-top: 10px;
+    flex-direction: column;
+    gap: 15px;
+  }
+  }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-content">
+      <div class="topbar-item">
+        <span class="topbar-icon">📍</span>
+        <span>Sede principal: Calle Virreynal 191, El Cortijo - Trujillo</span>
+      </div>
+      <div class="topbar-item">
+        <span class="topbar-icon">📧</span>
+        <span>tssublimados@gmail.com</span>
+        <span class="topbar-icon">📱</span>
+        <span>WhatsApp: 926736833</span>
+      </div>
+    </div>
+  </div>
+ <header>
+  <div class="header-content">
+    <img src="../img/logo.png" alt="Logo TS sublimados" class="logo">
+    <nav>
+      <a href="../index.html"><i class="fas fa-home"></i> Inicio</a>
+      <a href="../empresa/empresa.html"><i class="fas fa-building"></i> La Empresa</a>
+      <a href="../productos/productos.html"><i class="fas fa-shopping-bag"></i> Productos</a>
+      <a href="../pago/pago.html"><i class="fas fa-credit-card"></i> Formas de Pago</a>
+    </nav>
+  </div>
+</header>
+  <!-- Nueva sección del mapa -->
+  <section class="map-section">
+    <div class="map-container">
+      <div class="map-header">
+        <h2>📍 Nuestra Ubicación</h2>
+        <p>Visítanos en nuestro local principal. Estamos estratégicamente ubicados para brindarte el mejor servicio de sublimación.</p>
+      </div>
+
+      <div class="map-content">
+        <div class="map-info">
+          <h3>
+            <span>🏢</span>
+            TS Sublimados
+          </h3>
+          
+          <div class="location-details">
+            <div class="detail-item">
+              <div class="detail-icon">📍</div>
+              <div>
+                <strong>Dirección:</strong><br>
+                Trujillo, La Libertad, Perú
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-icon">⏰</div>
+              <div>
+                <strong>Horarios:</strong><br>
+                Lun - Sáb: 9:00 AM - 7:00 PM<br>
+                Domingo: 10:00 AM - 2:00 PM
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-icon">📞</div>
+              <div>
+                <strong>Contacto:</strong><br>
+                Teléfono: +51 926 736 833<br>
+                WhatsApp: +51 926 736 833
+              </div>
+            </div>
+            
+            <div class="detail-item">
+              <div class="detail-icon">🚗</div>
+              <div>
+                <strong>Acceso:</strong><br>
+                Fácil acceso en transporte público<br>
+                Estacionamiento disponible
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-buttons">
+            <a href="https://maps.google.com/?q=-8.099911252098357,-79.05134968814515" target="_blank" class="cta-btn cta-primary">
+              🗺️ Ver en Google Maps
+            </a>
+            <a href="https://wa.me/51926736833" target="_blank" class="cta-btn cta-secondary">
+              💬 WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="map-wrapper">
+          <div class="map-overlay">
+            <span>📍 TS Sublimados - Trujillo</span>
+          </div>
+          <iframe 
+            class="interactive-map"
+            src="https://maps.google.com/maps?q=-8.099911252098357,-79.05134968814515&z=16&output=embed"
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="brand-section">
+  <div class="brand-left">
+    <h1>Nuestra<br><span>Vision y mision</span></h1>
+  </div>
+  <div class="brand-right">
+    <p>
+     En TS Sublimados trabajamos con pasión para convertir ideas en productos únicos y personalizados. Nuestra misión es ofrecer tazas, polos y otros artículos sublimados con diseños creativos, de alta calidad y con un servicio cercano que valore cada detalle. Creemos que cada producto puede contar una historia, expresar una emoción o convertirse en el regalo perfecto.
+    Aspiramos a ser una marca reconocida a nivel nacional por nuestra originalidad, compromiso y presencia activa en redes sociales. Nuestra visión es crecer junto a nuestros clientes, innovando constantemente y posicionándonos como un referente en el mundo de la sublimación personalizada en el Perú.<a href="productos.html">Más información</a>
+    </p>
+  </div>
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
+    <script src="https://files.bpcontent.cloud/2025/07/24/22/20250724223016-HJURRSGY.js" defer></script>
+</section>
+
+  <script>
+    // Animaciones adicionales cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      // Efecto de aparición progresiva para los elementos
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observar elementos para animaciones
+      document.querySelectorAll('.detail-item').forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(30px)';
+        item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        observer.observe(item);
+      });
+
+      // Efecto hover para el mapa
+      const mapWrapper = document.querySelector('.map-wrapper');
+      mapWrapper.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px) scale(1.02)';
+      });
+      
+      mapWrapper.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+      });
+
+      // Animación de conteo para elementos numéricos (si los agregas)
+      function animateNumbers() {
+        const numbers = document.querySelectorAll('.animate-number');
+        numbers.forEach(number => {
+          const target = parseInt(number.textContent);
+          let current = 0;
+          const increment = target / 20;
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            number.textContent = Math.floor(current);
+          }, 50);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

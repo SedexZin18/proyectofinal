@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formas de Pago | TS Sublimados</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    /* Header moderno */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      height: 50px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a:hover {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Container principal */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    /* Título principal */
+    .titulo-principal {
+      text-align: center;
+      color: white;
+      margin-bottom: 3rem;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .titulo-principal h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .titulo-principal p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    /* Grid de métodos de pago */
+    .metodos-pago {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .metodo-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid transparent;
+    }
+
+    .metodo-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff6b35, #f7931e, #25d366, #667eea);
+      background-size: 300% 100%;
+      animation: gradientMove 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientMove {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .metodo-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: #667eea;
+    }
+
+    .metodo-card.active {
+      border-color: #25d366;
+      background: rgba(37, 211, 102, 0.1);
+    }
+
+    .metodo-icon {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #667eea;
+    }
+
+    .metodo-card h3 {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .metodo-card p {
+      text-align: center;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Formularios */
+    .formulario-container {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      display: none;
+      animation: slideInUp 0.5s ease-out;
+    }
+
+    .formulario-container.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1rem;
+    }
+
+    /* Botones */
+    .btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      display: inline-block;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: all 0.6s ease;
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+    }
+
+    .btn-success:hover {
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+    }
+
+    /* QR Container */
+    .qr-container {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .qr-code {
+      background: white;
+      padding: 1rem;
+      border-radius: 15px;
+      display: inline-block;
+      margin: 1rem 0;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .yape-info {
+      background: linear-gradient(135deg, #732c7b, #8e44ad);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      margin-top: 1rem;
+    }
+
+    .yape-info h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .yape-info p {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    /* Efectivo info */
+    .efectivo-info {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .sucursal {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      backdrop-filter: blur(10px);
+    }
+
+    .sucursal h4 {
+      color: #333;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sucursal p {
+      color: #666;
+      margin-bottom: 0.3rem;
+    }
+
+    /* Transferencia info */
+    .banco-info {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      backdrop-filter: blur(10px);
+    }
+
+    .banco-info h4 {
+      color: #333;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .cuenta-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .cuenta-item:last-child {
+      border-bottom: none;
+    }
+
+    /* Animaciones */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .titulo-principal h1 {
+        font-size: 2rem;
+      }
+
+      .titulo-principal p {
+        font-size: 1rem;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .metodos-pago {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Estados de carga */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .topbar {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 0;
+      font-size: 0.85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .topbar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .topbar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .topbar-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .topbar-icon {
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-content">
+      <div class="topbar-item">
+        <span class="topbar-icon">📍</span>
+        <span>Sede principal: Calle Virreynal 191, El Cortijo - Trujillo</span>
+      </div>
+      <div class="topbar-item">
+        <span class="topbar-icon">📧</span>
+        <span>tssublimados@gmail.com</span>
+        <span class="topbar-icon">📱</span>
+        <span>WhatsApp: 926736833</span>
+      </div>
+    </div>
+  </div>
+
+  <header>
+    <img src="../img/logo.png" alt="Logo TS sublimados" class="logo">
+    <nav>
+      <a href="../index.html"><i class="fas fa-home"></i> Inicio</a>
+      <a href="../empresa/empresa.html"><i class="fas fa-building"></i> La Empresa</a>
+      <a href="../productos/productos.html"><i class="fas fa-shopping-bag"></i> Productos</a>
+      <a href="../pago/pago.html"><i class="fas fa-credit-card"></i> Formas de Pago</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="titulo-principal">
+      <h1>💳 Formas de Pago</h1>
+      <p>Elige el método de pago que más te convenga para completar tu compra</p>
+    </div>
+
+    <!-- Métodos de Pago -->
+    <div class="metodos-pago">
+      <div class="metodo-card" onclick="seleccionarMetodo('tarjeta')">
+        <div class="metodo-icon">
+          <i class="fas fa-credit-card"></i>
+        </div>
+        <h3>Tarjeta de Crédito/Débito</h3>
+        <p>Paga de forma segura con tu tarjeta Visa, MasterCard o American Express</p>
+      </div>
+
+      <div class="metodo-card" onclick="seleccionarMetodo('yape')">
+        <div class="metodo-icon" style="color: #732c7b;">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h3>Yape</h3>
+        <p>Pago instantáneo con código QR. Rápido, fácil y seguro</p>
+      </div>
+
+      <div class="metodo-card" onclick="seleccionarMetodo('transferencia')">
+        <div class="metodo-icon" style="color: #28a745;">
+          <i class="fas fa-university"></i>
+        </div>
+        <h3>Transferencia Bancaria</h3>
+        <p>Transfiere directamente desde tu banco a nuestras cuentas</p>
+      </div>
+
+      <div class="metodo-card" onclick="seleccionarMetodo('efectivo')">
+        <div class="metodo-icon" style="color: #f7931e;">
+          <i class="fas fa-money-bill-wave"></i>
+        </div>
+        <h3>Pago en Efectivo</h3>
+        <p>Visita nuestros locales y paga directamente en efectivo</p>
+      </div>
+    </div>
+
+    <!-- Formulario Tarjeta -->
+    <div id="form-tarjeta" class="formulario-container">
+      <h3><i class="fas fa-credit-card"></i> Datos de la Tarjeta</h3>
+      <form onsubmit="procesarPagoTarjeta(event)">
+        <div class="form-group">
+          <label for="numero-tarjeta">Número de Tarjeta</label>
+          <input 
+            type="text" 
+            id="numero-tarjeta" 
+            placeholder="1234 5678 9012 3456" 
+            maxlength="19"
+            oninput="formatearNumeroTarjeta(this)"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <label for="nombre-titular">Nombre del Titular</label>
+          <input 
+            type="text" 
+            id="nombre-titular" 
+            placeholder="Como aparece en la tarjeta"
+            required
+          >
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fecha-vencimiento">Fecha de Vencimiento</label>
+            <input 
+              type="text" 
+              id="fecha-vencimiento" 
+              placeholder="MM/AA"
+              maxlength="5"
+              oninput="formatearFecha(this)"
+              required
+            >
+          </div>
+          <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input 
+              type="text" 
+              id="cvv" 
+              placeholder="123"
+              maxlength="4"
+              oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+              required
+            >
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success" style="width: 100%; margin-top: 1rem;">
+          <i class="fas fa-lock"></i> Procesar Pago Seguro
+        </button>
+      </form>
+    </div>
+
+    <!-- Formulario Yape -->
+    <div id="form-yape" class="formulario-container">
+      <div class="qr-container">
+        <h3><i class="fas fa-mobile-alt"></i> Pagar con Yape</h3>
+        <p>Escanea el código QR con tu app de Yape</p>
+        
+        <div class="qr-code">
+          <div id="qr-yape"></div>
+        </div>
+        
+        <div class="yape-info">
+          <h4>📱 También puedes yapear al:</h4>
+          <p>926 736 833</p>
+          <small>Titular: TS SUBLIMADOS</small>
+        </div>
+        
+        <button onclick="confirmarPagoYape()" class="btn btn-success" style="margin-top: 1rem;">
+          <i class="fas fa-check"></i> Ya realicé el pago
+        </button>
+      </div>
+    </div>
+
+    <!-- Formulario Transferencia -->
+    <div id="form-transferencia" class="formulario-container">
+      <h3><i class="fas fa-university"></i> Datos para Transferencia</h3>
+      
+      <div class="banco-info">
+        <h4>🏦 Banco de Crédito del Perú (BCP)</h4>
+        <div class="cuenta-item">
+          <span>Cuenta Corriente:</span>
+          <strong>123-456789-0-12</strong>
+        </div>
+        <div class="cuenta-item">
+          <span>CCI:</span>
+          <strong>002-123-456789012345-67</strong>
+        </div>
+        <div class="cuenta-item">
+          <span>Titular:</span>
+          <strong>TS SUBLIMADOS S.A.C.</strong>
+        </div>
+      </div>
+
+      <div class="banco-info">
+        <h4>🏦 Banco Interbank</h4>
+        <div class="cuenta-item">
+          <span>Cuenta de Ahorros:</span>
+          <strong>987-654321-0-98</strong>
+        </div>
+        <div class="cuenta-item">
+          <span>CCI:</span>
+          <strong>003-987-654321098765-43</strong>
+        </div>
+        <div class="cuenta-item">
+          <span>Titular:</span>
+          <strong>TS SUBLIMADOS S.A.C.</strong>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <p><strong>📧 Importante:</strong> Envía tu voucher de transferencia al WhatsApp <strong>926 736 833</strong> para confirmar tu pago</p>
+        <a href="https://wa.me/51926736833?text=Hola%2C%20realicé%20una%20transferencia%20bancaria%20y%20quiero%20enviar%20mi%20voucher" 
+           target="_blank" class="btn btn-success" style="margin-top: 1rem;">
+          <i class="fab fa-whatsapp"></i> Enviar Voucher
+        </a>
+      </div>
+    </div>
+
+    <!-- Formulario Efectivo -->
+    <div id="form-efectivo" class="formulario-container">
+      <div class="efectivo-info">
+        <h3><i class="fas fa-store"></i> Pago en Efectivo</h3>
+        <p>Visita cualquiera de nuestros locales para pagar en efectivo</p>
+        
+        <div class="sucursal">
+          <h4>🏪 Local Principal - Centro</h4>
+          <p><i class="fas fa-map-marker-alt"></i> Av. España 123, Trujillo</p>
+          <p><i class="fas fa-clock"></i> Lunes a Sábado: 9:00 AM - 7:00 PM</p>
+          <p><i class="fas fa-phone"></i> (044) 123-456</p>
+        </div>
+
+        <div class="sucursal">
+          <h4>🏪 Calle Virreynal 191, El Cortijo - Trujillo</h4>
+          <p><i class="fas fa-map-marker-alt"></i> El cortijo, Trujillo</p>
+          <p><i class="fas fa-clock"></i> Lunes a Domingo: 10:00 AM - 10:00 PM</p>
+          <p><i class="fas fa-phone"></i> (044) 654-321</p>
+        </div>
+
+        <div style="margin-top: 2rem;">
+          <p><strong>💡 Consejo:</strong> Llama antes de visitarnos para confirmar la disponibilidad del producto</p>
+          <a href="https://wa.me/51926736833?text=Hola%2C%20quiero%20coordinar%20una%20visita%20para%20pagar%20en%20efectivo" 
+             target="_blank" class="btn" style="margin-top: 1rem;">
+            <i class="fab fa-whatsapp"></i> Coordinar Visita
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
+    <script src="https://files.bpcontent.cloud/2025/07/24/22/20250724223016-HJURRSGY.js" defer></script>
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+  <script>
+    let metodoSeleccionado = null;
+
+    function seleccionarMetodo(metodo) {
+      // Remover clase active de todas las cards
+      document.querySelectorAll('.metodo-card').forEach(card => {
+        card.classList.remove('active');
+      });
+      
+      // Ocultar todos los formularios
+      document.querySelectorAll('.formulario-container').forEach(form => {
+        form.classList.remove('active');
+      });
+      
+      // Activar la card seleccionada
+      event.currentTarget.classList.add('active');
+      metodoSeleccionado = metodo;
+      
+      // Mostrar el formulario correspondiente
+      const formulario = document.getElementById(`form-${metodo}`);
+      if (formulario) {
+        formulario.classList.add('active');
+        
+        // Si es Yape, generar QR
+        if (metodo === 'yape') {
+          generarQRYape();
+        }
+        
+        // Scroll suave al formulario
+        formulario.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function generarQRYape() {
+      const qrContainer = document.getElementById('qr-yape');
+      qrContainer.innerHTML = ''; // Limpiar contenido previo
+      
+      // Datos para el QR de Yape
+      const yapeDatos = {
+        phone: '51926736833',
+        name: 'TS SUBLIMADOS',
+        amount: '0.00' // Se puede personalizar
+      };
+      
+      // Crear QR
+      const qr = new QRious({
+        element: document.createElement('canvas'),
+        value: `https://yape.me/${yapeDatos.phone}`,
+        size: 200,
+        level: 'M'
+      });
+      
+      qrContainer.appendChild(qr.element);
+    }
+
+    function formatearNumeroTarjeta(input) {
+      let value = input.value.replace(/\s/g, '').replace(/[^0-9]/gi, '');
+      let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+      input.value = formattedValue;
+    }
+
+    function formatearFecha(input) {
+      let value = input.value.replace(/\D/g, '');
+      if (value.length >= 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+      }
+      input.value = value;
+    }
+
+    function procesarPagoTarjeta(event) {
+      event.preventDefault();
+      
+      const btn = event.target.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      
+      // Mostrar estado de carga
+      btn.innerHTML = '<div class="loading"></div> Procesando...';
+      btn.disabled = true;
+      
+      // Simular procesamiento
+      setTimeout(() => {
+        alert('🎉 ¡Pago procesado exitosamente!\n\nGracias por tu compra. Recibirás un email de confirmación en breve.');
+        
+        // Restaurar botón
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        
+        // Limpiar formulario
+        event.target.reset();
+      }, 3000);
+    }
+
+    function confirmarPagoYape() {
+      const confirmation = confirm('¿Has completado el pago por Yape?\n\nSi es así, recibirás una confirmación en breve.');
+      
+      if (confirmation) {
+        alert('🎉 ¡Pago registrado!\n\nGracias por tu pago con Yape. Te contactaremos pronto para confirmar tu pedido.');
+        
+        // Redirigir a WhatsApp para confirmación
+        window.open('https://wa.me/51926736833?text=Hola%2C%20acabo%20de%20realizar%20un%20pago%20por%20Yape%20y%20quiero%20confirmar%20mi%20pedido', '_blank');
+      }
+    }
+
+    // Efectos visuales adicionales
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animación de entrada de las cards
+      const cards = document.querySelectorAll('.metodo-card');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+        card.style.animation = 'slideInUp 0.6s ease-out forwards';
+      });
+    });
+
+    // Validación en tiempo real
+    document.getElementById('numero-tarjeta').addEventListener('input', function() {
+      const value = this.value.replace(/\s/g, '');
+      const icon = this.parentElement.querySelector('.card-icon') || document.createElement('i');
+      
+      if (value.startsWith('4')) {
+        icon.className = 'fab fa-cc-visa card-icon';
+        icon.style.color = '#1a1f71';
+      } else if (value.startsWith('5') || value.startsWith('2')) {
+        icon.className = 'fab fa-cc-mastercard card-icon';
+        icon.style.color = '#eb001b';
+      } else if (value.startsWith('3')) {
+        icon.className = 'fab fa-cc-amex card-icon';
+        icon.style.color = '#006fcf';
+      } else {
+        icon.className = 'fas fa-credit-card card-icon';
+        icon.style.color = '#666';
+      }
+      
+      if (!this.parentElement.querySelector('.card-icon')) {
+        icon.style.position = 'absolute';
+        icon.style.right = '15px';
+        icon.style.top = '50%';
+        icon.style.transform = 'translateY(-50%)';
+        icon.style.fontSize = '1.5rem';
+        this.parentElement.style.position = 'relative';
+        this.parentElement.appendChild(icon);
+      }
+    });
+  </script>
+
+</body>
+</html>
